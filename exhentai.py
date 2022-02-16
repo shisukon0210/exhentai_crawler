@@ -31,7 +31,7 @@ def max_page(soup):
 	max_page = int(change_bpage[-2].text)
 	return max_page
 
-# 用書名創建資料夾，並取得路徑，失敗重載時有針對資料夾已存再做報錯處裡
+# 用書名創建資料夾，並取得路徑
 def mkdir(book_name):
 	path = './magic_index' + '/' + book_name
 	if os.path.exists(path):
@@ -40,7 +40,6 @@ def mkdir(book_name):
 		os.makedirs(path)
 		return path
 
-# 實用 容易套用至其他爬蟲
 # 送出request，並用美麗湯整理html
 def get_soup(url,headers,cookies):
 	i = 0
@@ -61,7 +60,6 @@ def get_img_data(soup):
 	img_data = requests.get(img).content
 	return img_data
 
-# 有傻屌在評論區貼連結，害我拿每一頁連結的部分只能重刻
 # 獲取每一頁的連結，單行本200+的那種頁
 def get_page_link(soup,pages,url,headers,cookies):
 	alink = soup.find_all("div" ,class_ = "gdtm")
